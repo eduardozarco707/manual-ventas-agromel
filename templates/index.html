@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Manual de Inducción - Agromel SRL</title>
+    <style>
+        /* 1. ESTRUCTURA PRINCIPAL (AHORA CON IMAGEN DE FONDO) */
+        body {
+            /* Aquí busca tu imagen llamada fondo.jpg en la carpeta static */
+            background-image: url('/static/fondo.jpg'); 
+            background-size: cover; /* Hace que cubra toda la pantalla */
+            background-position: center; /* La centra perfectamente */
+            background-repeat: no-repeat;
+            background-attachment: fixed; /* Evita que el fondo se mueva */
+            background-color: #e0e5ec; /* Color por si la imagen tarda en cargar */
+            
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        /* 2. FORMATO RECTANGULAR ESTRICTO */
+        .escenario-3d {
+            perspective: 2000px;
+            width: 100%;
+            max-width: 400px;
+            height: 80vh;
+            max-height: 680px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        /* 3. EL LIBRO */
+        .libro {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            background-color: white;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4); /* Sombra un poco más fuerte para resaltar sobre el fondo */
+            border-left: 18px solid #cc0000;
+            border-radius: 4px 12px 12px 4px;
+            transform-style: preserve-3d;
+        }
+
+        /* 4. HOJAS Y ANIMACIÓN LIMPIA */
+        .hoja {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: white;
+            padding: 25px 25px;
+            box-sizing: border-box;
+            border-radius: 0 12px 12px 0;
+            transform-origin: left center;
+            
+            transition: transform 0.8s ease-in-out, 
+                        opacity 0.8s ease-in-out, 
+                        box-shadow 0.8s ease-in-out;
+            
+            transform: rotateY(90deg);
+            opacity: 0;
+            overflow-y: auto;
+            box-shadow: inset 20px 0 50px rgba(0,0,0,0.05);
+        }
+
+        .contenido-hoja {
+            padding-bottom: 20px;
+        }
+
+        .hoja.activa { 
+            transform: rotateY(0deg);
+            opacity: 1; 
+            z-index: 5;
+            box-shadow: inset 0 0 0 rgba(0,0,0,0);
+        }
+
+        .hoja.pasada { 
+            transform: rotateY(-90deg);
+            opacity: 0; 
+            z-index: 1;
+            box-shadow: inset -50px 0 50px rgba(0,0,0,0.1);
+        }
+
+        /* 5. TIPOGRAFÍA Y FORMATO WORD */
+        h1, h2, h3 { color: #cc0000; margin-top: 0; }
+        h1 { font-size: 24px; text-align: center; line-height: 1.3; margin-bottom: 20px;}
+        h2 { font-size: 16px; margin-bottom: 10px; }
+        h3 { font-size: 15px; margin-bottom: 8px; }
+        p { color: #333; line-height: 1.4; font-size: 13px; margin-bottom: 10px; text-align: justify; }
+        
+        ul { margin-top: 5px; padding-left: 20px; margin-bottom: 15px; }
+        li { color: #333; line-height: 1.5; font-size: 13px; margin-bottom: 8px; text-align: justify; }
+        strong { color: #000; }
+        
+        .centrado { text-align: center; }
+        .imagen-placeholder { display: block; margin: 15px auto; max-width: 85%; border-radius: 5px; }
+
+        .hoja::-webkit-scrollbar { width: 4px; }
+        .hoja::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
+
+        /* 6. BOTONES */
+        .controles {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 400px;
+            gap: 15px;
+        }
+
+        button {
+            flex: 1;
+            padding: 12px 15px;
+            background-color: #cc0000;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 0 #990000;
+            transition: all 0.1s;
+        }
+        button:active:not(:disabled) {
+            box-shadow: 0 0 0 #990000;
+            transform: translateY(4px);
+        }
+        button:disabled { background-color: #d5d5d5; color: #888; cursor: not-allowed; box-shadow: none; }
+    </style>
+</head>
+<body>
+
+    <div class="escenario-3d">
+        <div class="libro" id="miLibro">
+            
+            <div class="hoja activa" id="hoja-1">
+                <div class="contenido-hoja centrado" style="margin-top: 25%;">
+                    <img src="/static/logo.png" alt="Logo agromel" class="imagen-placeholder" style="max-width: 180px;">
+                    <br>
+                    <h1>MANUAL DE ORIENTACIÓN E INDUCCIÓN DE PERSONAL</h1>
+                    <h2 style="color: black; font-size: 18px;">Posición: Asesor de Ventas</h2>
+                </div>
+            </div>
+
+            <div class="hoja" id="hoja-2">
+                <div class="contenido-hoja">
+                    <h2>¿Quienes somos ¿</h2>
+                    <p>Agromel S.R.L. inició sus operaciones en septiembre del año 2007 en la ciudad de Santa Cruz, Bolivia.</p>
+                    <p>La empresa nació con el firme compromiso de suministrar insumos de excelente calidad para la producción pecuaria en general, identificando la necesidad del productor boliviano de contar con un aliado confiable para la salud y nutrición de sus animales.</p>
+                    <p>Lo que comenzó como un proyecto de comercialización, rápidamente evolucionó hacia la importación y fabricación propia.</p>
+                    <p>Un hito fundamental en nuestra historia fue la implementación de nuestra propia planta de producción, especializada en la elaboración de núcleos y premezclas vitamínico-minerales (premix) para alimentos balanceados.</p>
+                    <p>Gracias a esto, nacieron líneas de nutrición animal muy reconocidas en el mercado nacional, como la línea de suplementos <strong>Bovimix</strong>.</p>
+                    <p>Con más de una década de experiencia en el sector agropecuario, Agromel ha logrado consolidar la representación exclusiva en Bolivia de importantes laboratorios y marcas internacionales.</p>
+                    <p>Esto nos permite ofrecer un portafolio completo que incluye medicamentos, equipos, bioinsumos y servicios técnicos especializados para la ganadería bovina, porcicultura y avicultura.</p>
+                    <p>Nuestro enfoque siempre ha sido estar cerca del productor. Por ello, manteniendo nuestra oficina matriz en Santa Cruz, hemos expandido nuestras operaciones abriendo sucursales estratégicas en Cochabamba y San Ignacio de Velasco.</p>
+                    <p>Hoy en día, contamos con una sólida red de distribución que nos permite atender y llevar soluciones agropecuarias a productores en diversas regiones de todo el país.</p>
+                </div>
+            </div>
+
+            <div class="hoja" id="hoja-3">
+                <div class="contenido-hoja">
+                    <h2>Misión</h2>
+                    <ul>
+                        <li><strong>Proveer soluciones integrales:</strong> Suministrar alimentos balanceados, núcleos, premezclas vitamínicas y minerales de alta calidad para la pecuaria.</li>
+                        <li><strong>Innovación y Tecnología:</strong> Ofrecer las mejores tecnologías y capacidad técnica para maximizar la rentabilidad de los productores agropecuarios.</li>
+                        <li><strong>Cercanía:</strong> Acompañar a los productores en campo con asesoramiento especializado y soluciones efectivas.</li>
+                    </ul>
+                    
+                    <h2 style="margin-top: 25px;">Visión</h2>
+                    <ul>
+                        <li><strong>Consolidación Nacional:</strong> Posicionarse como la empresa líder en nutrición y salud animal en Bolivia, destacando en el desarrollo productivo nacional.</li>
+                        <li><strong>Innovación y Expansión:</strong> Ser un referente en la introducción de productos innovadores (como la línea Vetex) y en la diversificación de soluciones agropecuarias.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hoja" id="hoja-4">
+                <div class="contenido-hoja">
+                    <h2>Valores</h2>
+                    <ul>
+                        <li><strong>Compromiso con el Productor:</strong> Nuestra prioridad es entender las necesidades del campo y brindar un respaldo técnico cercano, acompañando a nuestros clientes en cada etapa de su producción.</li>
+                        <li><strong>Calidad y Excelencia:</strong> Garantizamos productos veterinarios y nutricionales de los más altos estándares, asegurando la salud animal y el rendimiento óptimo para el ganadero y agricultor.</li>
+                        <li><strong>Integridad y Confianza:</strong> Actuamos con transparencia y honestidad en cada transacción y asesoría, construyendo relaciones sólidas y a largo plazo con nuestros clientes y proveedores.</li>
+                        <li><strong>Trabajo en Equipo:</strong> Fomentamos un ambiente de colaboración entre nuestras áreas operativas, comerciales y administrativas, sumando esfuerzos para entregar un servicio ágil y oportuno.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hoja" id="hoja-5">
+                <div class="contenido-hoja">
+                    <h2>Organigrama</h2>
+                    <p>El siguiente organigrama refleja cómo estamos organizados y cómo fluye la comunicación entre los distintos departamentos.</p>
+                    <p>Como <strong>Asesor de Ventas</strong>, tu rol es una pieza central en esta estructura.</p>
+                    <p>En tu día a día, estarás respaldado directamente por el administrador, y trabajarás de la mano con áreas de apoyo fundamentales como Almacén/bodegero, y con el área de facturación.</p>
+                    <p>Conocer esta distribución te permitirá saber exactamente con quién coordinar cada paso de tu trabajo</p>
+                    <img src="/static/organigrama.png" alt="Organigrama Agromel" class="imagen-placeholder">
+                </div>
+            </div>
+
+            <div class="hoja" id="hoja-6">
+                <div class="contenido-hoja">
+                    <h2>Políticas, Reglamentos y Beneficios Básicos</h2>
+                    <p>En Agromel S.R.L. creemos que las reglas claras construyen relaciones laborales duraderas.</p>
+                    <p>Como Asesor de Ventas, tu día a día se dividirá entre nuestra oficina comercial y el trabajo de campo visitando a los productores.</p>
+                    <p>A continuación, detallamos las normativas que guiarán tu desempeño:</p>
+                    
+                    <h3>Jornada Laboral y Horarios</h3>
+                    <p>Debido a la naturaleza comercial de tu puesto, tu horario requiere flexibilidad y coordinación constante con la Jefatura de Ventas:</p>
+                    <ul>
+                        <li><strong>Horario Base (Oficina):</strong> Lunes a viernes de 08:00 a 12:00 y de 14:00 a 18:00. Sábados de 08:00 a 12:00.</li>
+                        <li><strong>Trabajo en Ruta (Campo):</strong> Los días asignados a visitas a propiedades, haciendas o clientes fuera de la ciudad, el horario se adaptará a la planificación de la ruta aprobada. Es obligatorio reportar el inicio y fin de la jornada al supervisor a través de los canales oficiales.</li>
+                        <li><strong>Puntualidad:</strong> Se espera que estés listo para iniciar tus labores a la hora acordada, ya sea en la sucursal o en el primer punto de visita de tu ruta.</li>
+                    </ul>
+                    
+                    <h3>B. Sistema de Compensaciones y Beneficios</h3>
+                    <p>Nuestro objetivo es recompensar tu esfuerzo y los resultados obtenidos en el campo:</p>
+                    <ul>
+                        <li><strong>Estructura Salarial:</strong> Tu compensación mensual se compone de un salario base fijo más un esquema de comisiones variables, calculado sobre el volumen de ventas cobradas en tu zona asignada.</li>
+                        <li><strong>Fechas de Pago:</strong> Los salarios fijos se abonan el día 5 de cada mes. Las comisiones correspondientes al mes cerrado se liquidan y pagan el día 15 del mes siguiente.</li>
+                        <li><strong>Viáticos de Viaje:</strong> Para las rutas fuera del radio urbano, Agromel S.R.L. cubre los gastos de alimentación y hospedaje. Estos fondos se entregan de manera anticipada y deben ser rendidos con facturas o recibos autorizados en un plazo máximo de 48 horas tras finalizar el viaje.</li>
+                        <li><strong>Beneficios Sociales:</strong> Cuentas con todos los beneficios establecidos por la ley (seguro de salud, aportes a largo plazo, aguinaldo) desde tu primer día de contratación formal.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hoja" id="hoja-7">
+                <div class="contenido-hoja">
+                    <h2>C. Normas de Convivencia y Uso de Herramientas</h2>
+                    <p>El respeto y el profesionalismo son la base de nuestra cultura organizacional:</p>
+                    <ul>
+                        <li><strong>Código de Vestimenta:</strong> Para trabajo en oficina, vestimenta casual de negocios. Para trabajo de campo, es obligatorio el uso del uniforme proporcionado por la empresa (camisa/polera corporativa, pantalón de trabajo resistente y en caso de ser necesario botas o calzado cerrado de seguridad).</li>
+                        <li><strong>Uso de Vehículos Corporativos:</strong> Si se te asigna una camioneta o motocicleta de la empresa, eres el responsable directo de su cuidado, limpieza y de reportar cualquier mantenimiento preventivo al área de Logística. El vehículo es de uso estrictamente laboral.</li>
+                    </ul>
+                    
+                    <h2 style="margin-top: 20px;">D. Políticas de Seguridad y Salud Ocupacional (SSO)</h2>
+                    <p>Tu bienestar es nuestra prioridad, especialmente considerando los riesgos del trabajo en zonas rurales:</p>
+                    <ul>
+                        <li><strong>Seguridad Vial:</strong> Es política de "Tolerancia Cero" conducir bajo los efectos del alcohol o usar el teléfono celular mientras se maneja. El uso del cinturón de seguridad es obligatorio en todo momento. Se prohíbe exceder los límites de velocidad en carreteras y caminos vecinales.</li>
+                        <li><strong>Manejo de Insumos:</strong> Aunque tu rol es comercial, ocasionalmente podrías transportar muestras o pedidos de urgencia. Está estrictamente prohibido abrir envases sellados de productos veterinarios o agroquímicos. En caso de derrame accidental en el vehículo, debes notificar inmediatamente a tu supervisor.</li>
+                        <li><strong>Reporte de Incidentes:</strong> Cualquier incidente, accidente de tránsito (por menor que sea) o percance de salud durante tu jornada laboral en el campo debe ser reportado a Recursos Humanos y a tu Jefe Directo de forma inmediata para activar los protocolos de asistencia.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hoja" id="hoja-8">
+                <div class="contenido-hoja">
+                    <h2>A este punto te preguntaras ¿Cuál es tu rol como asesor de venta en nuestra empresa?</h2>
+                    <p>Bueno el Asesor de Ventas es el rostro de Agromel S.R.L. en el campo.</p>
+                    <p>Su propósito principal es brindar soluciones integrales al productor agropecuario, garantizando una asesoría técnica de calidad y asegurando el crecimiento comercial en su zona asignada.</p>
+                    
+                    <h3>A. Funciones Principales</h3>
+                    <p>Las tareas diarias y operativas que sostienen el ciclo de ventas:</p>
+                    <ul>
+                        <li><strong>Prospección en campo:</strong> Identificar y visitar periódicamente a clientes potenciales, como haciendas ganaderas, granjas avícolas/porcinas y tiendas veterinarias locales.</li>
+                        <li><strong>Asesoría técnica:</strong> Explicar los beneficios, dosificación y aplicación de nuestro portafolio de productos (núcleos, premezclas vitamínico-minerales y medicamentos).</li>
+                        <li><strong>Gestión de pedidos:</strong> Tomar requerimientos en campo y registrarlos oportunamente en el sistema comercial para su despacho.</li>
+                        <li><strong>Labor de cobranza:</strong> Realizar el seguimiento y recaudo de los pagos pendientes de los clientes de su cartera, entregando los recibos correspondientes.</li>
+                        <li><strong>Reporte de gestión:</strong> Llenar el reporte diario de visitas, kilometraje y rendición de gastos/viáticos al finalizar la jornada.</li>
+                    </ul>
+                    
+                    <h3>B. Responsabilidades del Cargo</h3>
+                    <p>El nivel de compromiso y cuidado que exige la posición:</p>
+                    <ul>
+                        <li>Mantener fidelizados a los clientes actuales y expandir la presencia de la marca Agromel en la zona geográfica asignada.</li>
+                        <li>Garantizar que las recomendaciones de uso de los productos veterinarios se hagan bajo los estándares técnicos de la empresa, protegiendo la salud animal y la inversión del productor.</li>
+                        <li>Hacer un uso responsable de las herramientas de trabajo proporcionadas (vehículo corporativo, celular, muestrarios).</li>
+                        <li>Informar a la Jefatura Comercial sobre los movimientos de la competencia, precios y nuevas necesidades detectadas en el campo.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hoja" id="hoja-9">
+                <div class="contenido-hoja">
+                    <h2>C. Metas y Objetivos</h2>
+                    <p>Los indicadores de rendimiento (KPIs) por los cuales será evaluado:</p>
+                    <ul>
+                        <li>Alcanzar o superar el volumen de facturación mensual establecido en su presupuesto.</li>
+                        <li>Incorporar un número mínimo de clientes nuevos y activos cada trimestre.</li>
+                        <li>Cumplir con el cronograma semanal de visitas programadas (cobertura de zona).</li>
+                    </ul>
+                    
+                    <h2 style="margin-top: 25px;">D. Relación con Otras Áreas</h2>
+                    <p>El Asesor de Ventas no trabaja solo; es parte de una cadena que requiere coordinación constante:</p>
+                    <ul>
+                        <li><strong>Administrador:</strong> Es su línea de reporte directo. Coordina con ellos la aprobación de descuentos especiales, estrategias de penetración y evaluación de desempeño.</li>
+                        <li><strong>Almacén/Bodeguero:</strong> Mantiene comunicación diaria para verificar el stock de productos, programar las fechas de despacho y asegurar que los insumos lleguen a tiempo a las propiedades de los clientes.</li>
+                        <li><strong>Área de Facturación:</strong> Trabaja de la mano para solicitar la aprobación de líneas de crédito para nuevos productores y reportar los depósitos o pagos recaudados en las rutas.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="hoja" id="hoja-10">
+                <div class="contenido-hoja">
+                    <h2 class="centrado">¡Felicidades por completar tu inducción inicial en Agromel S.R.L.!</h2>
+                    <p>A partir de hoy, asumes formalmente tus responsabilidades como Asesor de ventas.</p>
+                    <p>Sin embargo, nuestro compromiso con tu desarrollo recién comienza. Sabemos que la adaptación al trabajo de campo, a nuestras rutas y al catálogo de productos requiere tiempo y apoyo constante.</p>
+                    <p>Para asegurarnos de que te sientas respaldado y de que nuestro proceso de integración haya sido efectivo, implementaremos un <strong>Plan de Seguimiento de 90 días</strong>.</p>
+                    <p>Al finalizar tu primer, segundo y tercer mes de trabajo, recibirás una breve encuesta de evaluación obligatoria.</p>
+                    <p>El objetivo principal de estas encuestas es:</p>
+                    <ul>
+                        <li>Saber cómo te sientes con tu carga de trabajo, tus metas y la relación con tu equipo.</li>
+                        <li>Identificar si la información que recibiste en tu primera semana fue suficiente para enfrentar los retos reales en el campo.</li>
+                        <li>Descubrir si necesitas refuerzo técnico en alguna línea de productos (veterinaria o nutrición animal) o mayor acompañamiento de tu Jefe de Ventas.</li>
+                    </ul>
+                    <p>Tu retroalimentación será confidencial y es una herramienta clave para garantizar tu éxito en la empresa.</p>
+                    <p class="centrado" style="margin-top: 15px;"><strong>¡Confiamos en tu potencial y te deseamos el mayor de los éxitos en tus rutas!</strong></p>
+                    
+                    <div class="centrado" style="margin-top: 20px; padding: 15px; background-color: #ffebee; border-radius: 8px;">
+                        <p style="font-weight: bold; color: #cc0000; margin-bottom: 5px;">PARA ACCEDER A LA ENCUESTA ACCEDE POR ESTE LINK</p>
+                        
+                        <a href="https://forms.gle/5SM9mHPHe5jZJhHD6" target="_blank" style="color: #cc0000; font-weight: bold; text-decoration: underline; display: block; margin: 10px 0;">https://forms.gle/iaoS64iEJLvqWXVh9</a>
+                        
+                        <p style="font-weight: bold; color: #cc0000; margin-top: 15px; margin-bottom: 5px;">O ESQUANEA ESTE QR</p>
+                        <img src="/static/qr.png" alt="Código QR Encuesta" style="width: 130px; border-radius: 5px;">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="controles">
+            <button id="btnAnterior" onclick="cambiarHoja(-1)" disabled>⬅ Atrás</button>
+            <button id="btnSiguiente" onclick="cambiarHoja(1)">Siguiente ➡</button>
+        </div>
+    </div>
+
+    <script>
+        let hojaActual = 1;
+        const totalHojas = 10;
+
+        function cambiarHoja(direccion) {
+            const hojaVieja = document.getElementById('hoja-' + hojaActual);
+            hojaActual += direccion;
+            const hojaNueva = document.getElementById('hoja-' + hojaActual);
+
+            if (direccion === 1) {
+                hojaVieja.classList.remove('activa');
+                hojaVieja.classList.add('pasada');
+                hojaNueva.classList.add('activa');
+            } else {
+                hojaVieja.classList.remove('activa');
+                hojaNueva.classList.remove('pasada');
+                hojaNueva.classList.add('activa');
+            }
+
+            document.getElementById('btnAnterior').disabled = (hojaActual === 1);
+            document.getElementById('btnSiguiente').disabled = (hojaActual === totalHojas);
+            
+            setTimeout(() => {
+                hojaNueva.scrollTop = 0;
+            }, 300);
+        }
+    </script>
+</body>
+</html>
