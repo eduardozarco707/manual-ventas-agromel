@@ -5,24 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Manual de Inducción - Agromel SRL</title>
     <style>
-        /* 1. ESTRUCTURA PRINCIPAL (AHORA CON IMAGEN DE FONDO) */
+        /* 1. ESTRUCTURA PRINCIPAL */
         body {
-            /* Aquí busca tu imagen llamada fondo.jpg en la carpeta static */
             background-image: url('/static/fondo.jpg'); 
-            background-size: cover; /* Hace que cubra toda la pantalla */
-            background-position: center; /* La centra perfectamente */
+            background-size: cover; 
+            background-position: center; 
             background-repeat: no-repeat;
-            background-attachment: fixed; /* Evita que el fondo se mueva */
-            background-color: #e0e5ec; /* Color por si la imagen tarda en cargar */
+            background-attachment: fixed; 
+            background-color: #e0e5ec; 
             
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: center; /* Centra todo verticalmente */
             align-items: center;
-            height: 100vh;
+            
+            /* FIX PARA CELULARES: 100dvh respeta las barras de navegación */
+            height: 100dvh; 
+            min-height: 100vh;
             margin: 0;
-            padding: 10px;
+            padding: 10px 15px 35px 15px; /* Más espacio (35px) en la parte de abajo */
             box-sizing: border-box;
             overflow: hidden;
         }
@@ -32,10 +34,11 @@
             perspective: 2000px;
             width: 100%;
             max-width: 400px;
-            height: 80vh;
-            max-height: 680px;
+            /* Se redujo un poco el alto del libro para asegurar espacio a los botones */
+            height: 72vh; 
+            max-height: 650px;
             position: relative;
-            margin-bottom: 20px;
+            margin-bottom: 25px; /* Separa un poco más los botones del libro */
         }
 
         /* 3. EL LIBRO */
@@ -44,7 +47,7 @@
             height: 100%;
             position: relative;
             background-color: white;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4); /* Sombra un poco más fuerte para resaltar sobre el fondo */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4); 
             border-left: 18px solid #cc0000;
             border-radius: 4px 12px 12px 4px;
             transform-style: preserve-3d;
@@ -119,7 +122,7 @@
 
         button {
             flex: 1;
-            padding: 12px 15px;
+            padding: 14px 15px; /* Botones un poco más gruesos para que sean fáciles de presionar */
             background-color: #cc0000;
             color: white;
             border: none;
@@ -153,7 +156,7 @@
 
             <div class="hoja" id="hoja-2">
                 <div class="contenido-hoja">
-                    <h2>¿Quienes somos ?</h2>
+                    <h2>¿Quienes somos ¿</h2>
                     <p>Agromel S.R.L. inició sus operaciones en septiembre del año 2007 en la ciudad de Santa Cruz, Bolivia.</p>
                     <p>La empresa nació con el firme compromiso de suministrar insumos de excelente calidad para la producción pecuaria en general, identificando la necesidad del productor boliviano de contar con un aliado confiable para la salud y nutrición de sus animales.</p>
                     <p>Lo que comenzó como un proyecto de comercialización, rápidamente evolucionó hacia la importación y fabricación propia.</p>
@@ -317,7 +320,7 @@
                     <div class="centrado" style="margin-top: 20px; padding: 15px; background-color: #ffebee; border-radius: 8px;">
                         <p style="font-weight: bold; color: #cc0000; margin-bottom: 5px;">PARA ACCEDER A LA ENCUESTA ACCEDE POR ESTE LINK</p>
                         
-                        <a href="https://forms.gle/5SM9mHPHe5jZJhHD6" target="_blank" style="color: #cc0000; font-weight: bold; text-decoration: underline; display: block; margin: 10px 0;">https://forms.gle/iaoS64iEJLvqWXVh9</a>
+                        <a href="https://forms.gle/iaoS64iEJLvqWXVh" target="_blank" style="color: #cc0000; font-weight: bold; text-decoration: underline; display: block; margin: 10px 0; font-size: 14px; word-wrap: break-word; word-break: break-all;">https://forms.gle/iaoS64iEJLvqWXVh</a>
                         
                         <p style="font-weight: bold; color: #cc0000; margin-top: 15px; margin-bottom: 5px;">O ESQUANEA ESTE QR</p>
                         <img src="/static/qr.png" alt="Código QR Encuesta" style="width: 130px; border-radius: 5px;">
@@ -361,5 +364,4 @@
         }
     </script>
 </body>
-
 </html>
