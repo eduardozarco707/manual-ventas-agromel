@@ -17,14 +17,13 @@
             font-family: Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Centra todo verticalmente */
+            justify-content: center;
             align-items: center;
             
-            /* FIX PARA CELULARES: 100dvh respeta las barras de navegación */
             height: 100dvh; 
             min-height: 100vh;
             margin: 0;
-            padding: 10px 15px 35px 15px; /* Más espacio (35px) en la parte de abajo */
+            padding: 10px 15px 35px 15px; 
             box-sizing: border-box;
             overflow: hidden;
         }
@@ -34,11 +33,10 @@
             perspective: 2000px;
             width: 100%;
             max-width: 400px;
-            /* Se redujo un poco el alto del libro para asegurar espacio a los botones */
             height: 72vh; 
             max-height: 650px;
             position: relative;
-            margin-bottom: 25px; /* Separa un poco más los botones del libro */
+            margin-bottom: 25px;
         }
 
         /* 3. EL LIBRO */
@@ -53,7 +51,7 @@
             transform-style: preserve-3d;
         }
 
-        /* 4. HOJAS Y ANIMACIÓN LIMPIA */
+        /* 4. HOJAS Y ANIMACIÓN */
         .hoja {
             position: absolute;
             top: 0;
@@ -94,11 +92,11 @@
             box-shadow: inset -50px 0 50px rgba(0,0,0,0.1);
         }
 
-        /* 5. TIPOGRAFÍA Y FORMATO WORD */
+        /* 5. TIPOGRAFÍA Y FORMATO */
         h1, h2, h3 { color: #cc0000; margin-top: 0; }
         h1 { font-size: 24px; text-align: center; line-height: 1.3; margin-bottom: 20px;}
         h2 { font-size: 16px; margin-bottom: 10px; }
-        h3 { font-size: 15px; margin-bottom: 8px; }
+        h3 { font-size: 15px; margin-bottom: 5px; font-weight: bold; } /* Aseguramos que los títulos de fotos sean negrita y rojos */
         p { color: #333; line-height: 1.4; font-size: 13px; margin-bottom: 10px; text-align: justify; }
         
         ul { margin-top: 5px; padding-left: 20px; margin-bottom: 15px; }
@@ -107,6 +105,9 @@
         
         .centrado { text-align: center; }
         .imagen-placeholder { display: block; margin: 15px auto; max-width: 85%; border-radius: 5px; }
+        
+        /* Estilo especial para las fotos de la empresa */
+        .foto-empresa { border: 2px solid #eee; box-shadow: 0 4px 8px rgba(0,0,0,0.1); margin-top: 5px; margin-bottom: 20px; max-height: 180px; object-fit: cover; }
 
         .hoja::-webkit-scrollbar { width: 4px; }
         .hoja::-webkit-scrollbar-thumb { background: #ccc; border-radius: 4px; }
@@ -122,7 +123,7 @@
 
         button {
             flex: 1;
-            padding: 14px 15px; /* Botones un poco más gruesos para que sean fáciles de presionar */
+            padding: 14px 15px;
             background-color: #cc0000;
             color: white;
             border: none;
@@ -156,7 +157,7 @@
 
             <div class="hoja" id="hoja-2">
                 <div class="contenido-hoja">
-                    <h2>¿Quiénes somos ?</h2>
+                    <h2>¿Quienes somos ¿</h2>
                     <p>Agromel S.R.L. inició sus operaciones en septiembre del año 2007 en la ciudad de Santa Cruz, Bolivia.</p>
                     <p>La empresa nació con el firme compromiso de suministrar insumos de excelente calidad para la producción pecuaria en general, identificando la necesidad del productor boliviano de contar con un aliado confiable para la salud y nutrición de sus animales.</p>
                     <p>Lo que comenzó como un proyecto de comercialización, rápidamente evolucionó hacia la importación y fabricación propia.</p>
@@ -303,6 +304,45 @@
 
             <div class="hoja" id="hoja-10">
                 <div class="contenido-hoja">
+                    <h2 class="centrado" style="margin-bottom: 20px;">Conoce Agromel</h2>
+                    
+                    <h3 class="centrado">Instalaciones de la empresa en san Ignacio</h3>
+                    <img src="/static/foto1.jpg" alt="Instalaciones San Ignacio" class="imagen-placeholder foto-empresa">
+                    
+                    <h3 class="centrado">Entrada principal de la empresa</h3>
+                    <img src="/static/foto2.jpg" alt="Entrada Principal" class="imagen-placeholder foto-empresa">
+                </div>
+            </div>
+
+            <div class="hoja" id="hoja-11">
+                <div class="contenido-hoja">
+                    <h3 class="centrado" style="margin-top: 15px;">Área de administración</h3>
+                    <img src="/static/foto3.jpg" alt="Área de Administración" class="imagen-placeholder foto-empresa">
+                    
+                    <h3 class="centrado">Oficinas de ventas</h3>
+                    <img src="/static/foto4.jpg" alt="Oficinas de Ventas" class="imagen-placeholder foto-empresa">
+                </div>
+            </div>
+
+            <div class="hoja" id="hoja-12">
+                <div class="contenido-hoja">
+                    <h3 class="centrado" style="margin-top: 15px;">Área de facturación</h3>
+                    <img src="/static/foto5.jpg" alt="Área de Facturación" class="imagen-placeholder foto-empresa">
+                    
+                    <h3 class="centrado">Mostradores de los productos en la empresa</h3>
+                    <img src="/static/foto6.jpg" alt="Mostradores de Productos" class="imagen-placeholder foto-empresa">
+                </div>
+            </div>
+
+            <div class="hoja" id="hoja-13">
+                <div class="contenido-hoja">
+                    <h3 class="centrado" style="margin-top: 20px;">Almacén de insumos en la empresa</h3>
+                    <img src="/static/foto7.jpg" alt="Almacén de Insumos" class="imagen-placeholder foto-empresa" style="max-height: 250px;">
+                </div>
+            </div>
+
+            <div class="hoja" id="hoja-14">
+                <div class="contenido-hoja">
                     <h2 class="centrado">¡Felicidades por completar tu inducción inicial en Agromel S.R.L.!</h2>
                     <p>A partir de hoy, asumes formalmente tus responsabilidades como Asesor de ventas.</p>
                     <p>Sin embargo, nuestro compromiso con tu desarrollo recién comienza. Sabemos que la adaptación al trabajo de campo, a nuestras rutas y al catálogo de productos requiere tiempo y apoyo constante.</p>
@@ -319,9 +359,7 @@
                     
                     <div class="centrado" style="margin-top: 20px; padding: 15px; background-color: #ffebee; border-radius: 8px;">
                         <p style="font-weight: bold; color: #cc0000; margin-bottom: 5px;">PARA ACCEDER A LA ENCUESTA ACCEDE POR ESTE LINK</p>
-                        
-                        <a href="https://forms.gle/jcfC6c9d7QTjq1TD8" target="_blank" style="color: #cc0000; font-weight: bold; text-decoration: underline; display: block; margin: 10px 0; font-size: 14px; word-wrap: break-word; word-break: break-all;">https://forms.gle/iaoS64iEJLvqWXVh</a>
-                        
+                        <a href="https://forms.gle/iaoS64iEJLvqWXVh" target="_blank" style="color: #cc0000; font-weight: bold; text-decoration: underline; display: block; margin: 10px 0; font-size: 14px; word-wrap: break-word; word-break: break-all;">https://forms.gle/iaoS64iEJLvqWXVh</a>
                         <p style="font-weight: bold; color: #cc0000; margin-top: 15px; margin-bottom: 5px;">O ESQUANEA ESTE QR</p>
                         <img src="/static/qr.png" alt="Código QR Encuesta" style="width: 130px; border-radius: 5px;">
                     </div>
@@ -338,7 +376,7 @@
 
     <script>
         let hojaActual = 1;
-        const totalHojas = 10;
+        const totalHojas = 14;
 
         function cambiarHoja(direccion) {
             const hojaVieja = document.getElementById('hoja-' + hojaActual);
@@ -365,6 +403,3 @@
     </script>
 </body>
 </html>
-
-
-
